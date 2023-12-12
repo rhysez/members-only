@@ -20,4 +20,4 @@ UserSchema.virtual('full_name', function() {
     return fullName
 })
 
-modules.exports(mongoose.model('User', UserSchema));
+module.exports = mongoose.model('User', UserSchema);
