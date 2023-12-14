@@ -16,7 +16,8 @@ exports.signup_post = asyncHandler(async (req, res, next) => {
           first_name: req.body.firstname,
           last_name: req.body.lastname,
           user_name: req.body.username,
-          password: req.body.password
+          password: req.body.password,
+          membership_status: 'Club Member'
         });
         const result = await user.save();
         res.redirect("/home");
