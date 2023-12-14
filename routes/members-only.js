@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
 
 const app_controller = require('../controllers/appController')
 
@@ -11,7 +12,10 @@ router.post('/', app_controller.signup_post);
 
 router.get('/login', app_controller.login_get);
 
-router.post('/login', app_controller.login_post);
+router.post('/login', passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/"
+}));
 
 router.get('/home', app_controller.home);
 
