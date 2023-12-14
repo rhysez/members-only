@@ -6,6 +6,17 @@
   </head>
   <body>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %> page</p>
+
+    <h3>Users in database: 
+        <% users.forEach((user) => { %>
+            <li><%= user.first_name %></li>
+          <% }); %>
+    </h3>
+
+    <h3>Posts created:
+      <% posts.forEach((post) => { %>
+        <li><%= post.title %></li>
+      <% }); %>
+    </h3>
   </body>
 </html>
