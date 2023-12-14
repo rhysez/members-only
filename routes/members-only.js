@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const user_controller = require('../controllers/userController')
+const app_controller = require('../controllers/appController')
 
-// User routes (including home route)
+// App routes
 
-router.get('/', user_controller.index);
+router.get('/', app_controller.index)
+
+router.get('/home', app_controller.home);
 
 module.exports = router;
