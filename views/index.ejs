@@ -9,13 +9,20 @@
 
     <h3>Users in database: 
         <% users.forEach((user) => { %>
-            <li><%= user.first_name %></li>
+            <div>
+              <h4><%= user.first_name %> <%= user.last_name %>, <%= user.membership_status %></h4> 
+            </div>
           <% }); %>
     </h3>
 
     <h3>Posts created:
       <% posts.forEach((post) => { %>
-        <li><%= post.title %></li>
+        <div>
+          <h4><%= post.title %></h4>
+          <p><%= post.body %></p>
+          <p><%= post.author.first_name %> <%= post.author.last_name %></p>
+          <p><%= post.time_stamp %></p>
+        </div>
       <% }); %>
     </h3>
   </body>

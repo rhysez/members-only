@@ -12,7 +12,7 @@ exports.home = asyncHandler(async (req, res, next) => {
     try {
         const [users, posts] = await Promise.all([
             User.find({}).exec(),
-            Post.find({}).sort({ time_stamp: 1 }).exec()
+            Post.find({}).sort({ time_stamp: 1 }).populate('author').exec() // populate isn't working
         ]);
     
         res.render('index', {
