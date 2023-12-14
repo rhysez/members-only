@@ -2,6 +2,7 @@ require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+const session = require("express-session");
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 var cookieParser = require('cookie-parser');
@@ -31,6 +32,10 @@ async function main() {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(express.urlencoded({ extended: false }));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

@@ -1,29 +1,21 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-
-    <h3>Users in database: 
-        <% users.forEach((user) => { %>
-            <div>
-              <h4><%= user.first_name %> <%= user.last_name %>, <%= user.membership_status %></h4> 
-            </div>
-          <% }); %>
-    </h3>
-
-    <h3>Posts created:
-      <% posts.forEach((post) => { %>
-        <div>
-          <h4><%= post.title %></h4>
-          <p><%= post.body %></p>
-          <p><%= post.author.first_name %> <%= post.author.last_name %></p>
-          <p><%= post.time_stamp %></p>
-        </div>
-      <% }); %>
-    </h3>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <h1>Sign Up</h1>
+  <form action="" method="POST">
+    <label for="firstname">First name</label>
+    <input name="firstname" type="text">
+    <label for="lastname">First name</label>
+    <input name="lastname" type="text">
+    <label for="username">Username</label>
+    <input name="username" placeholder="Your email address" type="email" />
+    <label for="password">Password</label>
+    <input name="password" type="password" />
+    <button>Sign Up</button>
+  </form>
+</body>
 </html>

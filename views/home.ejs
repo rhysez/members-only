@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+
+    <h3>Users in database: 
+        <% users.forEach((user) => { %>
+            <div>
+              <h4><%= user.first_name %> <%= user.last_name %>, <%= user.membership_status %></h4> 
+            </div>
+          <% }); %>
+    </h3>
+
+    <h3>Posts created:
+      <% posts.forEach((post) => { %>
+        <div>
+          <h4><%= post.title %></h4>
+          <p><%= post.body %></p>
+          <p><%= post.author.first_name %> <%= post.author.last_name %></p>
+          <p><%= post.time_stamp %></p>
+        </div>
+      <% }); %>
+    </h3>
+  </body>
+</html>
