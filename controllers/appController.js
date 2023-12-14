@@ -17,7 +17,7 @@ exports.signup_post = asyncHandler(async (req, res, next) => {
           last_name: req.body.lastname,
           user_name: req.body.username,
           password: req.body.password,
-          membership_status: 'Club Member'
+          membership_status: 'Guest'
         });
         const result = await user.save();
         res.redirect("/home");
@@ -33,12 +33,7 @@ exports.login_get = asyncHandler(async (req, res, next) => {
             Post.find({}).sort({ time_stamp: 1 }).populate('author').exec()
         ]);
     
-        res.render('home', {
-            title: 'Home',
-            users: users,
-            posts: posts,
-            authUser: req.user // this is the problem
-        })
+        res.render('login')
     } catch(err) {
         console.log(err);
     }

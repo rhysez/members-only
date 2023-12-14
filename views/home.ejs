@@ -8,38 +8,29 @@
     <% if (authUser) {%>
         <h1>Welcome back, <%= authUser.first_name %>.</h1>
         <a href="/logout">Log out</a>
+    <% } else { %>
+        <h1>Welcome to members-only. You can log in <a href="/login">here</a></h1>
 
         <h1><%= title %></h1>
+    <% } %>
 
+    <% if (authUser) {%>
         <h2>All members: </h2>
             <% users.forEach((user) => { %>
                 <div>
                 <h4><%= user.first_name %> <%= user.last_name %>, <%= user.membership_status %></h4> 
                 </div>
             <% }); %>
-        
+    <% } %>
 
         <h2>Recent activity: </h2>
         <% posts.forEach((post) => { %>
             <div>
             <h4><%= post.title %></h4>
             <p><%= post.body %></p>
-            <p>posted by <%= post.author.first_name %> <%= post.author.last_name %></p>
-            <p><%= post.time_stamp %></p>
+            <% if (authUser) { %><p>posted by <%= post.author.first_name %> <%= post.author.last_name %></p> <% } %>
+            <% if (authUser) { %><p><%= post.time_stamp %></p> <% } %>
             </div>
         <% }); %>
-        
-    <% } else { %>
-        <h1>Welcome to members-only, please log in</h1>
-        <form action="/login" method="POST">
-          <label for="username">Username</label>
-          <input name="username" placeholder="username" type="text" />
-          <label for="password">Password</label>
-          <input name="password" type="password" />
-          <button>Log In</button>
-          <a href="/">Sign up</a>
-        </form>
-      <%}%>
-    
   </body>
 </html>
