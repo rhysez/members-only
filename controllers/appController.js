@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const Post = require('../models/post');
 const asyncHandler = require('express-async-handler');
+const bcrypt = require('bcryptjs');
 const session = require("express-session");
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
@@ -12,15 +13,20 @@ exports.signup_get = asyncHandler(async (req, res, next) => {
 
 exports.signup_post = asyncHandler(async (req, res, next) => {
     try {
-        const user = new User({
-          first_name: req.body.firstname,
-          last_name: req.body.lastname,
-          user_name: req.body.username,
-          password: req.body.password,
-          membership_status: 'Guest'
-        });
-        const result = await user.save();
-        res.redirect("/home");
+        bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+            if (err) {
+                res.redirect('/')
+            }
+            const user = new User({
+                first_name: req.body.firstname,
+                last_name: req.body.lastname,
+                user_name: req.body.username,
+                password: hashedPassword,
+                membership_status: 'Guest'
+              });
+            const result = await user.save();
+            res.redirect("/home");
+          });
       } catch(err) {
         return next(err);
       };
