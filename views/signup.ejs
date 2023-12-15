@@ -2,30 +2,46 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  <title>MembersOnly</title>
 </head>
 <body>
-  <h1>Sign Up</h1>
-  <form action="" method="POST">
-    <label for="firstname">First name</label>
-    <input name="firstname" type="text">
 
-    <label for="lastname">Last name</label>
-    <input name="lastname" type="text">
+  <section class="signup-page-container">
 
-    <label for="username">Username</label>
-    <input name="username" placeholder="Your email address" type="email" />
+    <section class="signup-art-container"></section>
 
-    <label for="password">Password</label>
-    <input name="password" type="password" />
+    <form class="signup-form" action="" method="POST">
+      
+      <section class="signup-form-container">
+        <h1 class="temp-app-title">MembersOnly</h1>
+        <h2 class="signup-title">Sign Up</h2>
+        <label for="firstname">First name</label>
+        <input class="form-input" name="firstname" type="text">
+  
+        <label for="lastname">Last name</label>
+        <input class="form-input" name="lastname" type="text">
+  
+        <label for="username">Username</label>
+        <input class="form-input" name="username" placeholder="Your email address" type="email" />
+  
+        <label for="password">Password</label>
+        <input class="form-input" name="password" type="password" />
+  
+        <label for="confirmpassword">Confirm password</label>
+        <input class="form-input" name="confirmpassword" type="password">
+  
+        <button class="signup-submit" type="submit">Sign Up</button>
+  
+        <a href="/login" class="signup-login">Log in</a>
+        <a href="/home" class="signup-home">Home</a>
 
-    <label for="confirmpassword">Confirm password</label>
-    <input name="confirmpassword" type="password">
+      </section>
 
-    <button type="submit">Sign Up</button>
+    </form>
 
-    <a href="/login">Log in</a>
-    <a href="/home">Homepage</a>
-  </form>
+  </section>
 </body>
 </html>
+  

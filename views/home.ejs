@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
+<%- include('layout'); -%>
+
+
     <% if (authUser) {%>
         <h1>Welcome back, <%= authUser.first_name %>.</h1>
         <a href="/logout">Log out</a>
@@ -32,5 +28,4 @@
             <% if (authUser) { %><p><%= post.time_stamp %></p> <% } %>
             </div>
         <% }); %>
-  </body>
-</html>
+
