@@ -17,15 +17,19 @@ exports.signup_post = asyncHandler(async (req, res, next) => {
             if (err) {
                 res.redirect('/')
             }
-            const user = new User({
-                first_name: req.body.firstname,
-                last_name: req.body.lastname,
-                user_name: req.body.username,
-                password: hashedPassword,
-                membership_status: 'Guest'
-              });
-            const result = await user.save();
-            res.redirect("/home");
+            if (req.body.confirmpassword === req.body.password) {
+                const user = new User({
+                    first_name: req.body.firstname,
+                    last_name: req.body.lastname,
+                    user_name: req.body.username,
+                    password: hashedPassword,
+                    membership_status: 'Guest'
+                });
+                const result = await user.save();
+                res.redirect("/home");
+            } else {
+                res.redirect('/')
+            }
           });
       } catch(err) {
         return next(err);
