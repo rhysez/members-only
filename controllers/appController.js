@@ -2,39 +2,63 @@ const User = require('../models/user');
 const Post = require('../models/post');
 const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcryptjs');
-const session = require("express-session");
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
+const { body, validationResult } = require("express-validator");
 
 // Authentication
 exports.signup_get = asyncHandler(async (req, res, next) => {
     res.render('signup');
 })
 
-exports.signup_post = asyncHandler(async (req, res, next) => {
-    try {
-        bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
-            if (err) {
-                res.redirect('/')
-            }
-            if (req.body.confirmpassword === req.body.password) {
-                const user = new User({
-                    first_name: req.body.firstname,
-                    last_name: req.body.lastname,
-                    user_name: req.body.username,
-                    password: hashedPassword,
-                    membership_status: 'Guest'
-                });
-                const result = await user.save();
-                res.redirect("/home");
-            } else {
-                res.redirect('/')
-            }
-          });
-      } catch(err) {
-        return next(err);
-      };
-})
+exports.signup_post = [
+    body('firstname')
+        .trim()
+        .isLength({ min: 1 })
+        .escape()
+        .withMessage('First name must be specified')
+        .isAlphanumeric()
+        .withMessage('First name must only contain alphanumeric characters'),
+    body('lastname')
+        .trim()
+        .isLength({ min: 1 })
+        .escape()
+        .withMessage('Last name must be specified')
+        .isAlphanumeric()
+        .withMessage('Last name must only contain alphanumeric characters'),
+    body('username')
+        .trim()
+        .isLength({ min: 1 })
+        .escape()
+        .withMessage('User name must be specified'),
+    body('password')
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+
+    asyncHandler(async (req, res, next) => {
+        try {
+            bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+                if (err) {
+                    res.redirect('/')
+                }
+                if (req.body.confirmpassword === req.body.password) {
+                    const user = new User({
+                        first_name: req.body.firstname,
+                        last_name: req.body.lastname,
+                        user_name: req.body.username,
+                        password: hashedPassword,
+                        membership_status: 'Guest'
+                    });
+                    const result = await user.save();
+                    res.redirect("/home");
+                } else {
+                    res.redirect('/')
+                }
+              });
+          } catch(err) {
+            return next(err);
+          }
+    }),
+ ]
 
 exports.login_get = asyncHandler(async (req, res, next) => {
     res.render('login')
