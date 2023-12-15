@@ -27,16 +27,8 @@ exports.signup_post = asyncHandler(async (req, res, next) => {
 })
 
 exports.login_get = asyncHandler(async (req, res, next) => {
-    try {
-        const [users, posts] = await Promise.all([
-            User.find({}).exec(),
-            Post.find({}).sort({ time_stamp: 1 }).populate('author').exec()
-        ]);
-    
-        res.render('login')
-    } catch(err) {
-        console.log(err);
-    }
+    res.render('login')
+ 
 })
 
 // Home page
