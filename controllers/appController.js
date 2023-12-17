@@ -103,6 +103,20 @@ exports.membership_post = [
         .equals(process.env.SECRET_PASSSCODE),
 
     asyncHandler(async (req, res, next) => {
-        // update user's membership status! find using id? 
+        try {
+            const [users, posts] = await Promise.all([
+                User.find({}).exec(),
+                Post.find({}).sort({ time_stamp: 1 }).populate('author').exec()
+            ]);
+            // update user membership status
+            res.render('home', {
+                title: 'Home',
+                users: users,
+                posts: posts,
+                authUser: req.user
+            })
+        } catch(err) {
+            console.log(err)
+        }
     })
 ]
