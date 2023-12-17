@@ -49,7 +49,7 @@ exports.signup_post = [
                         membership_status: 'Guest'
                     });
                     const result = await user.save();
-                    res.redirect("/home");
+                    res.redirect("/login");
                 } else {
                     res.redirect('/')
                 }

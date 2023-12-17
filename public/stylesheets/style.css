@@ -1,13 +1,28 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 
-  --blue: rgb(29, 161, 242);
+  --green: #a4e4e4;
   --black: rgb(20, 23, 26);
   --dark-grey: rgb(101, 119, 134);
   --light-grey: rgb(170, 184, 194);
   --very-light-grey: rgb(245, 248, 250);
 
-  --blue-hovered: rgb(90, 178, 232);
+  --white: white;
+
+  --green-hovered: #85dada;
+}
+
+/* Nav */
+
+.app-header {
+  background-color: var(--white);
+  margin: 0;
+  padding: 1rem;
+  border-bottom: solid 1px var(--green);
+}
+
+.app-title {
+  margin: 0;
 }
 
 /* Sign up page */
@@ -42,7 +57,10 @@ body, html {
 .signup-art-container {
   height: 100vh;
   width: 50%;
-  background: var(--blue);
+  background: url('../images/galaxy.jpg');
+  background-size: cover;    
+  background-repeat: no-repeat;
+  background-position: center center; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,31 +80,31 @@ body, html {
 
 .form-input {
   border: 1px solid var(--dark-grey);
-  border-radius: 7.5px;
+  border-radius: 10px;
   padding: 5px;
 }
 
 .signup-submit {
-  background-color: var(--blue);
+  background-color: var(--green);
   border: none;
-  border-radius: 7.5px;
+  border-radius: 20px;
   padding: 10px;
-  color: var(--very-light-grey);
+  color: var(--black);
   font-size: 1rem;
   cursor: pointer;
   transition: all ease-in-out 0.2s;
 }
 
 .signup-submit:hover, .signup-login:hover, .signup-home:hover {
-  background-color: var(--blue-hovered);
+  background-color: var(--green-hovered);
 }
 
 .signup-login, .signup-home {
-  background-color: var(--blue);
+  background-color: var(--green);
   border: none;
-  border-radius: 7.5px;
+  border-radius: 20px;
   padding: 10px;
-  color: var(--very-light-grey);
+  color: var(--black);
   font-size: 1rem;
   cursor: pointer;
   transition: all ease-in-out 0.2s;
@@ -99,4 +117,27 @@ body, html {
   .signup-art-container {
     display: none;
   }
+}
+
+/* Log in page */
+
+.login-container, .login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-container {
+  max-width: 25rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem;
+}
+
+.login-title {
+  text-align: center;
+}
+
+.login-form {
+  gap: 1rem;
 }
