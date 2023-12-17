@@ -1,0 +1,21 @@
+<%- include('layout'); -%>
+
+<section class="membership-container">
+    <section class="membership-text">
+        <h2 class="greeting-message"><%= title %></h2>
+
+        <ul>
+            <li>Create posts</li>
+            <li>See who created each post</li>
+            <li>See when posts were created</li>
+            <li>Get a cool green highlight on your name!</li>
+        </ul>
+    </section>
+
+    <form class="membership-form" action="" method="POST">
+        <label for="membership_password">Enter secret passcode: </label>
+        <input class="form-input" type="password" name="membership_password">
+        <button class="signup-submit" type="submit">Become a member</button>
+        <a href="/home"><button class="signup-submit">Go back</button></a>
+    </form>
+</section>

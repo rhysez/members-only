@@ -28,4 +28,8 @@ router.get('/logout', (req, res, next) => {
 
 router.get('/home', app_controller.home);
 
+router.get('/membership', app_controller.membership_get);
+
+router.post('/membership', app_controller.membership_post);
+
 module.exports = router;

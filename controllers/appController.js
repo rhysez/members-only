@@ -3,6 +3,7 @@ const Post = require('../models/post');
 const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcryptjs');
 const { body, validationResult } = require("express-validator");
+const dotenv = require('dotenv');
 
 // Authentication
 exports.signup_get = asyncHandler(async (req, res, next) => {
@@ -62,7 +63,6 @@ exports.signup_post = [
 
 exports.login_get = asyncHandler(async (req, res, next) => {
     res.render('login')
- 
 })
 
 // Home page
@@ -83,3 +83,27 @@ exports.home = asyncHandler(async (req, res, next) => {
         console.log(err);
     }
 });
+
+// Membership page
+exports.membership_get = asyncHandler(async (req, res, next) => {
+    try {
+        res.render('membership', {
+            title: 'As a member, you can...',
+            authUser: req.user
+        })
+    } catch(err) {
+        console.log(err);
+    }
+});
+
+exports.membership_post = [
+    body('membership_password', 'Passcode must be correct')
+        .trim()
+        .isLength({ min: 1 })
+        .escape()
+        .equals(process.env.SECRET_PASSSCODE),
+
+    asyncHandler(async (req, res, next) => {
+        // update user's membership status! 
+    })
+]

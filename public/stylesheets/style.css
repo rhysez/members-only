@@ -173,6 +173,13 @@ label {
   display: flex;
   gap: 2rem;
   margin: 1.5rem;
+  justify-content: center;
+}
+
+@media (max-width: 800px) {
+  .home-content-flow {
+    flex-direction: column;
+  }
 }
 
 .recent-activity-container {
@@ -180,6 +187,8 @@ label {
   border-radius: 10px;
   padding: 1rem;
   box-shadow: var(--box-shadow);
+  display: flex;
+  flex-direction: column;
 }
 
 .become-a-member {
@@ -245,7 +254,6 @@ label {
   padding-bottom: 0.25rem;
   border-radius: 10px;
   border: solid 1px var(--green);
-  width: 95%;
 }
 
 .anonymous-message {
@@ -255,4 +263,23 @@ label {
   width: 70%;
   text-align: center;
   border-radius: 10px;
+}
+
+/* Membership page */
+
+.membership-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.membership-form {
+  display: flex;
+  flex-direction: column;
+  width: 15rem;
+  margin-right: auto;
+  margin-left: auto;
+  gap: 1rem;
+  margin-top: 1rem;
+  align-items: center;
 }
