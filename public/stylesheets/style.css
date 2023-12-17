@@ -283,3 +283,22 @@ label {
   margin-top: 1rem;
   align-items: center;
 }
+
+.create-post-form {
+  display: flex;
+  flex-direction: column;
+  width: 20rem;
+  margin-right: auto;
+  margin-left: auto;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.create-post-input {
+  border: 1px solid var(--dark-grey);
+  border-radius: 10px;
+  padding: 5px;
+  color: var(--dark-grey);
+  height: 2rem;
+  font-size: 1.25rem;
+}

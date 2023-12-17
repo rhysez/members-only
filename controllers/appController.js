@@ -115,3 +115,14 @@ exports.membership_post = [
         }   
     })
 ]
+
+// Create new post 
+
+exports.create_post_get = asyncHandler(async (req, res, next) => {
+    try {
+        res.render('create_post')
+    } catch(err) {
+        console.log(err);
+    }
+});
+

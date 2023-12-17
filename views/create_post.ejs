@@ -1,0 +1,18 @@
+<%- include('layout'); -%>
+
+<section class="membership-container">
+    <section class="membership-text">
+        <h2 class="greeting-message">What's on your mind, <%= currentUser.first_name %>?</h2>
+    </section>
+
+    <form class="create-post-form" action="" method="POST">
+
+        <label for="post_title">Post title:</label>
+        <input class="create-post-input" type="text" name="post_title">
+
+        <label for="post_message">Your message:</label>
+        <input class="create-post-input" type="text" name="post_message">
+
+        <button class="signup-submit" type="submit">Create post</button>
+    </form>
+</section>
