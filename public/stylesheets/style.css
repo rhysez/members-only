@@ -183,12 +183,6 @@ label {
   justify-content: center;
 }
 
-@media (max-width: 800px) {
-  .home-content-flow {
-    flex-direction: column;
-  }
-}
-
 .recent-activity-container {
   background-color: var(--white);
   border-radius: 10px;
@@ -196,6 +190,16 @@ label {
   box-shadow: var(--box-shadow);
   display: flex;
   flex-direction: column;
+  max-width: 50%;
+}
+
+@media (max-width: 800px) {
+  .home-content-flow {
+    flex-direction: column;
+  }
+  .recent-activity-container {
+    max-width: 100%;
+  }
 }
 
 .become-a-member {

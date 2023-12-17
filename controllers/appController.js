@@ -138,12 +138,12 @@ exports.create_post_post = [
 
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
-        const dt = DateTime.now();
+        const dateReadable = DateTime.now().toFormat('MMMM dd, yyyy');
 
         const post = new Post({
             title: req.body.post_title,
             body: req.body.post_message,
-            time_stamp: dt.toLocaleString(DateTime.DATETIME_MED),
+            time_stamp: dateReadable,
             author: req.user._id
         })
 

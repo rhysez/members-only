@@ -50,7 +50,7 @@
                 <strong><p class="post-title"><%= post.title %></p></strong>
                 <p class="post-body"><%= post.body %></p>
                 <% if (authUser && authUser.membership_status === 'Guest') { %> <p class="anonymous-message">Become a member to see who wrote this post!</p> <% } %>
-                <% if (authUser && authUser.membership_status === 'Club Member') { %><p>posted by <%= post.author.first_name %> <%= post.author.last_name %></p> <% } %>
+                <% if (authUser && authUser.membership_status === 'Club Member') { %><p>posted by <strong><%= post.author.first_name %> <%= post.author.last_name %></strong></p><% } %>
                 <% if (authUser && authUser.membership_status === 'Club Member') { %><p><%= post.time_stamp %></p> <% } %>
             </div>
         <% }); %>
