@@ -34,6 +34,6 @@ router.post('/membership', app_controller.membership_post);
 
 router.get('/create_post', app_controller.create_post_get);
 
-// create_post post request goes here
+router.post('/create_post', app_controller.create_post_post);
 
 module.exports = router;

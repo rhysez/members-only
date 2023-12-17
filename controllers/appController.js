@@ -4,6 +4,7 @@ const Post = require('../models/post');
 const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcryptjs');
 const { body, validationResult } = require("express-validator");
+const { DateTime } = require("luxon");
 
 // Authentication
 exports.signup_get = asyncHandler(async (req, res, next) => {
@@ -126,3 +127,36 @@ exports.create_post_get = asyncHandler(async (req, res, next) => {
     }
 });
 
+exports.create_post_post = [
+    body('post_title')
+        .trim()
+        .isLength({ min: 1 }),
+
+    body('post_message')
+        .trim()
+        .isLength({ min: 1 }),
+
+    asyncHandler(async (req, res, next) => {
+        const errors = validationResult(req);
+        const dt = DateTime.now();
+
+        const post = new Post({
+            title: req.body.post_title,
+            body: req.body.post_message,
+            time_stamp: dt.toLocaleString(DateTime.DATETIME_MED),
+            author: req.user._id
+        })
+
+        if (!errors.isEmpty()) {
+            console.log(errors);
+            res.redirect('/home');
+        } else {
+            try {
+                await post.save();
+                res.redirect('/home');
+            } catch(err) {
+                console.log(err)
+            }
+        }   
+    })
+]

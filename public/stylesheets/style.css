@@ -26,6 +26,13 @@
   text-align: center;
   margin: 0;
   color: var(--dark-grey);
+  text-decoration: none;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  list-style: none;
 }
 
 /* Sign up page */
