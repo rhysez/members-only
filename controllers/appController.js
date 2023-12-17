@@ -108,13 +108,10 @@ exports.membership_post = [
                 User.find({}).exec(),
                 Post.find({}).sort({ time_stamp: 1 }).populate('author').exec()
             ]);
-            // update user membership status
-            res.render('home', {
-                title: 'Home',
-                users: users,
-                posts: posts,
-                authUser: req.user
-            })
+
+            await User.findByIdAndUpdate(req.user._id, { membership_status: 'Club Member'})
+
+            res.redirect('/home');
         } catch(err) {
             console.log(err)
         }
