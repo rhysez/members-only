@@ -14,7 +14,7 @@
             </section>
         <% } else { %>
             <section class="greeting-container">
-                <h2 class="greeting-message">Welcome to MembersOnly.</h2>
+                <h2 class="greeting-message">Welcome to MembersOnly</h2>
                 <div class="greeting-buttons">
                     <a class="signup-login" href="/login">Log in</a>
                     <a class="signup-login" href="/">Sign up</a>
@@ -42,13 +42,14 @@
     </section>
     
     <section class="recent-activity-container">
-        <h2 class="greeting-message">Recent activity: </h2>
+        <h2 class="greeting-message">Recent posts from members </h2>
         <% posts.forEach((post) => { %>
             <div class="post">
-                <h4><%= post.title %></h4>
-                <p><%= post.body %></p>
-                <% if (authUser) { %><p>posted by <%= post.author.first_name %> <%= post.author.last_name %></p> <% } %>
-                <% if (authUser) { %><p><%= post.time_stamp %></p> <% } %>
+                <strong><p class="post-title"><%= post.title %></p></strong>
+                <p class="post-body"><%= post.body %></p>
+                <% if (authUser && authUser.membership_status === 'Guest') { %> <p class="anonymous-message">Become a member to see who wrote this post!</p> <% } %>
+                <% if (authUser && authUser.membership_status === 'Club Member') { %><p>posted by <%= post.author.first_name %> <%= post.author.last_name %></p> <% } %>
+                <% if (authUser && authUser.membership_status === 'Club Member') { %><p><%= post.time_stamp %></p> <% } %>
             </div>
         <% }); %>
     </section>

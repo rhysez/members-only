@@ -236,3 +236,23 @@ label {
   background-color: var(--dark-grey);
   color: var(--white);
 }
+
+.post {
+  background-color: var(--very-light-grey);
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  border-radius: 10px;
+  border: solid 1px var(--green);
+  width: 95%;
+}
+
+.anonymous-message {
+  background-color: var(--dark-grey);
+  color: var(--white);
+  padding: 0.25rem;
+  width: 70%;
+  text-align: center;
+  border-radius: 10px;
+}
