@@ -89,7 +89,6 @@ exports.membership_get = asyncHandler(async (req, res, next) => {
     try {
         res.render('membership', {
             title: 'As a member, you can...',
-            authUser: req.user
         })
     } catch(err) {
         console.log(err);
@@ -104,6 +103,6 @@ exports.membership_post = [
         .equals(process.env.SECRET_PASSSCODE),
 
     asyncHandler(async (req, res, next) => {
-        // update user's membership status! 
+        // update user's membership status! find using id? 
     })
 ]
