@@ -1,31 +1,57 @@
 <%- include('layout'); -%>
 
-
-    <% if (authUser) {%>
-        <h1>Welcome back, <%= authUser.first_name %>.</h1>
-        <a href="/logout">Log out</a>
-    <% } else { %>
-        <h1>Welcome to members-only. You can log in <a href="/login">here</a></h1>
-
-        <h1><%= title %></h1>
-    <% } %>
-
-    <% if (authUser) {%>
-        <h2>All members: </h2>
-            <% users.forEach((user) => { %>
-                <div>
-                <h4><%= user.first_name %> <%= user.last_name %>, <%= user.membership_status %></h4> 
+<section class="home-content-flow">
+    <section class="home-side-content">
+        <% if (authUser) {%>
+            <section class="greeting-container">
+                <h2 class="greeting-message">Welcome back, <%= authUser.first_name %></h2>
+                <div class="greeting-buttons">
+                    <a class="logout-button" href="/logout">Log out</a>
+                    <% if (authUser.membership_status === 'Guest') { %>
+                        <a class="become-a-member" href="/logout">Join the club</a>
+                    <% } %>
                 </div>
-            <% }); %>
-    <% } %>
-
-        <h2>Recent activity: </h2>
+            </section>
+        <% } else { %>
+            <section class="greeting-container">
+                <h2 class="greeting-message">Welcome to MembersOnly.</h2>
+                <div class="greeting-buttons">
+                    <a class="signup-login" href="/login">Log in</a>
+                    <a class="signup-login" href="/">Sign up</a>
+                </div>
+            </section>
+        <% } %>
+    
+       
+            <% if (authUser) {%>
+                <section class="members-container">
+                    <h2 class="greeting-message">All members: </h2>
+                    <div class="members-list">
+                        <% users.forEach((user) => { %>
+                            <div>
+                            <% if (user.membership_status === 'Guest') { %>
+                                <p class="guest-user"><%= user.first_name %> <%= user.last_name %>, <%= user.membership_status %></p> 
+                            <% } else { %>
+                                <p class="member-user"><%= user.first_name %> <%= user.last_name %>, <%= user.membership_status %></p> 
+                            <% } %>
+                            </div>
+                        <% }); %>
+                    </div>
+                </section>
+            <% } %>
+    </section>
+    
+    <section class="recent-activity-container">
+        <h2 class="greeting-message">Recent activity: </h2>
         <% posts.forEach((post) => { %>
-            <div>
-            <h4><%= post.title %></h4>
-            <p><%= post.body %></p>
-            <% if (authUser) { %><p>posted by <%= post.author.first_name %> <%= post.author.last_name %></p> <% } %>
-            <% if (authUser) { %><p><%= post.time_stamp %></p> <% } %>
+            <div class="post">
+                <h4><%= post.title %></h4>
+                <p><%= post.body %></p>
+                <% if (authUser) { %><p>posted by <%= post.author.first_name %> <%= post.author.last_name %></p> <% } %>
+                <% if (authUser) { %><p><%= post.time_stamp %></p> <% } %>
             </div>
         <% }); %>
+    </section>
+</section>
+   
 

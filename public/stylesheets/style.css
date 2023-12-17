@@ -3,13 +3,14 @@
 
   --green: #a4e4e4;
   --black: rgb(20, 23, 26);
-  --dark-grey: rgb(101, 119, 134);
+  --dark-grey: rgb(74, 88, 99);
   --light-grey: rgb(170, 184, 194);
   --very-light-grey: rgb(245, 248, 250);
-
   --white: white;
 
   --green-hovered: #85dada;
+
+  --box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
 }
 
 /* Nav */
@@ -22,7 +23,9 @@
 }
 
 .app-title {
+  text-align: center;
   margin: 0;
+  color: var(--dark-grey);
 }
 
 /* Sign up page */
@@ -37,17 +40,12 @@ body, html {
   font-size: 3rem;
   margin: 0;
   padding: 0;
-  color: var(--black);
+  color: var(--dark-grey);
 }
 
 .signup-title {
   font-size: 2rem;
-  color: var(--black);
-}
-
-.app-title {
-  text-align: center;
-  color: var(--black);
+  color: var(--dark-grey);
 }
 
 .signup-page-container {
@@ -82,6 +80,11 @@ body, html {
   border: 1px solid var(--dark-grey);
   border-radius: 10px;
   padding: 5px;
+  color: var(--dark-grey);
+}
+
+label {
+  color: var(--dark-grey);
 }
 
 .signup-submit {
@@ -89,7 +92,7 @@ body, html {
   border: none;
   border-radius: 20px;
   padding: 10px;
-  color: var(--black);
+  color: var(--dark-grey);
   font-size: 1rem;
   cursor: pointer;
   transition: all ease-in-out 0.2s;
@@ -104,7 +107,7 @@ body, html {
   border: none;
   border-radius: 20px;
   padding: 10px;
-  color: var(--black);
+  color: var(--dark-grey);
   font-size: 1rem;
   cursor: pointer;
   transition: all ease-in-out 0.2s;
@@ -136,8 +139,100 @@ body, html {
 
 .login-title {
   text-align: center;
+  color: var(--dark-grey);
 }
 
 .login-form {
   gap: 1rem;
+}
+
+/* Home page */
+
+.greeting-message {
+  color: var(--dark-grey);
+}
+
+.greeting-container {
+  padding: 1rem;
+}
+
+.members-container {
+  background-color: var(--white);
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: var(--box-shadow);
+}
+
+.home-side-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.home-content-flow {
+  display: flex;
+  gap: 2rem;
+  margin: 1.5rem;
+}
+
+.recent-activity-container {
+  background-color: var(--white);
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: var(--box-shadow);
+}
+
+.become-a-member {
+  background-color: var(--green);
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  color: var(--dark-grey);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all ease-in-out 0.2s;
+  width: 25%;
+  text-decoration: none;
+  text-align: center;
+  width: 70%;
+}
+
+.become-a-member:hover {
+  background-color: var(--green-hovered);
+}
+
+.greeting-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.logout-button {
+  background-color: var(--dark-grey);
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  color: var(--white);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all ease-in-out 0.2s;
+  width: 25%;
+  text-decoration: none;
+  text-align: center;
+  width: 70%
+}
+
+.member-user, .guest-user {
+  padding: 0.5rem;
+  border-radius: 5px;
+  margin: 0.25rem;
+}
+
+.member-user {
+  background-color: var(--green);
+}
+
+.guest-user {
+  background-color: var(--dark-grey);
+  color: var(--white);
 }
