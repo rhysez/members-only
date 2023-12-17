@@ -171,7 +171,7 @@ label {
 
 .home-content-flow {
   display: flex;
-  gap: 2rem;
+  gap: 4rem;
   margin: 1.5rem;
   justify-content: center;
 }

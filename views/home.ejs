@@ -9,6 +9,8 @@
                     <a class="logout-button" href="/logout">Log out</a>
                     <% if (authUser.membership_status === 'Guest') { %>
                         <a class="become-a-member" href="/membership">Join the club</a>
+                    <% } else if (authUser.membership_status === 'Club Member') { %>
+                        <a class="become-a-member" href="/">Create a post</a>
                     <% } %>
                 </div>
             </section>

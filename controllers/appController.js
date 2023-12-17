@@ -1,9 +1,9 @@
+require('dotenv').config();
 const User = require('../models/user');
 const Post = require('../models/post');
 const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcryptjs');
 const { body, validationResult } = require("express-validator");
-const dotenv = require('dotenv');
 
 // Authentication
 exports.signup_get = asyncHandler(async (req, res, next) => {
@@ -97,23 +97,21 @@ exports.membership_get = asyncHandler(async (req, res, next) => {
 
 exports.membership_post = [
     body('membership_password', 'Passcode must be correct')
-        .trim()
-        .isLength({ min: 1 })
-        .escape()
-        .equals(process.env.SECRET_PASSSCODE),
+        .equals('161151'),
 
     asyncHandler(async (req, res, next) => {
-        try {
-            const [users, posts] = await Promise.all([
-                User.find({}).exec(),
-                Post.find({}).sort({ time_stamp: 1 }).populate('author').exec()
-            ]);
+        const errors = validationResult(req);
 
-            await User.findByIdAndUpdate(req.user._id, { membership_status: 'Club Member'})
-
+        if (!errors.isEmpty()) {
+            console.log(errors);
             res.redirect('/home');
-        } catch(err) {
-            console.log(err)
-        }
+        } else {
+            try {
+                await User.findByIdAndUpdate(req.user._id, { membership_status: 'Club Member'})
+                res.redirect('/home');
+            } catch(err) {
+                console.log(err)
+            }
+        }   
     })
 ]
