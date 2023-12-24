@@ -3,7 +3,9 @@ const bcrypt = require('bcryptjs');
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+
 const session = require("express-session");
+const MemoryStore = require('memorystore')(session)
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 var cookieParser = require('cookie-parser');
@@ -43,8 +45,14 @@ async function main() {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(limiter);
-app.use(helmet());
+app.use(session({
+  cookie: { maxAge: 86400000 },
+  store: new MemoryStore({
+    checkPeriod: 86400000 // prune expired entries every 24h
+  }),
+  resave: false,
+  secret: 'keyboard cat'
+}))
 
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 passport.use(
@@ -83,6 +91,9 @@ app.use((req, res, next) => {
   next();
 });
 app.use(express.urlencoded({ extended: false }));
+
+app.use(limiter);
+app.use(helmet());
 
 app.use(logger('dev'));
 app.use(express.json());
