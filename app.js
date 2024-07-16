@@ -1,28 +1,28 @@
-require('dotenv').config();
-const bcrypt = require('bcryptjs');
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
+require("dotenv").config();
+const bcrypt = require("bcryptjs");
+var createError = require("http-errors");
+var express = require("express");
+var path = require("path");
 
 const session = require("express-session");
-const MemoryStore = require('memorystore')(session)
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const MemoryStore = require("memorystore")(session);
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+var cookieParser = require("cookie-parser");
+var logger = require("morgan");
 
-const User = require('./models/user');
+const User = require("./models/user");
 
-var indexRouter = require('./routes/index');
+var indexRouter = require("./routes/index");
 
-const compression = require('compression');
-const helmet = require('helmet');
+const compression = require("compression");
+const helmet = require("helmet");
 
 var app = express();
 
 const RateLimit = require("express-rate-limit");
 const limiter = RateLimit({
-  windowMs: 1 * 60 * 1000, 
+  windowMs: 1 * 60 * 1000,
   max: 20,
 });
 
@@ -31,9 +31,9 @@ mongoose.set("strictQuery", false);
 
 const mongoDB = process.env.MONGODB_URI;
 if (!mongoDB) {
-  console.error('Error: MONGODB_CONNECTION_STRING is not defined.');
+  console.error("Error: MONGODB_CONNECTION_STRING is not defined.");
 } else {
-  console.log('MONGODB_CONNECTION_STRING is successfully captured.');
+  console.log("MONGODB_CONNECTION_STRING is successfully captured.");
 }
 
 main().catch((err) => console.log(err));
@@ -42,17 +42,19 @@ async function main() {
 }
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 
-app.use(session({
-  cookie: { maxAge: 86400000 },
-  store: new MemoryStore({
-    checkPeriod: 86400000 // prune expired entries every 24h
-  }),
-  resave: false,
-  secret: 'keyboard cat'
-}))
+app.use(
+  session({
+    cookie: { maxAge: 86400000 },
+    store: new MemoryStore({
+      checkPeriod: 86400000, // prune expired entries every 24h
+    }),
+    resave: false,
+    secret: "keyboard cat",
+  })
+);
 
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 passport.use(
@@ -60,16 +62,18 @@ passport.use(
     try {
       const user = await User.findOne({ user_name: username });
       if (!user) {
+        console.log('wrong username')
         return done(null, false, { message: "Incorrect username" });
-      };
+      }
       const match = await bcrypt.compare(password, user.password);
       if (!match) {
-        return done(null, false, { message: 'Incorrect password' });
+        console.log('wrong password')
+        return done(null, false, { message: "Incorrect password" });
       }
       return done(null, user);
-    } catch(err) {
+    } catch (err) {
       return done(err);
-    };
+    }
   })
 );
 passport.serializeUser((user, done) => {
@@ -80,9 +84,9 @@ passport.deserializeUser(async (id, done) => {
   try {
     const user = await User.findById(id);
     done(null, user);
-  } catch(err) {
+  } catch (err) {
     done(err);
-  };
+  }
 });
 app.use(passport.initialize());
 app.use(passport.session());
@@ -95,30 +99,30 @@ app.use(express.urlencoded({ extended: false }));
 app.use(limiter);
 app.use(helmet());
 
-app.use(logger('dev'));
+app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(compression());
 
-app.use('/', indexRouter);
+app.use("/", indexRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.error = req.app.get("env") === "development" ? err : {};
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render("error");
 });
 
 module.exports = app;
